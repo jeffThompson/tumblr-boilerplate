@@ -1,41 +1,58 @@
 <!DOCTYPE html>
 <html lang="{block:English}en{/block:English}{block:French}fr{/block:French}{block:German}de{/block:German}{block:Japanese}ja{/block:Japanese}{block:Italian}it{/block:Italian}{block:Spanish}es{/block:Spanish}{block:Polish}pl{/block:Polish}">
+
 <head>
+
+	<!--
+		An ultra-minimal Tumblr template, forked from the Tumblr Boilerplate 
+		by Dave Santos: https://github.com/davesantos/tumblr-boilerplate
+		
+		Mostly just reformatted the HTML for easier navigation and hacking.
+	-->
+		
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width">
+
 	<title>{Title}{block:PostSummary} &mdash; {PostSummary}{/block:PostSummary}</title>
+
 	{block:Description}<meta name="description" content="{MetaDescription}">{/block:Description}
 
 	<link rel="apple-touch-icon" href="{PortraitURL-128}">
 	<link rel="shortcut icon" href="{Favicon}">
 	<link rel="alternate" type="application/rss+xml" href="{RSS}">
-	<!--Normalize 2.1.0 CSS-->
+
+	<!-- NORMALIZE CSS - include your own after this, or import an external stylesheet -->
 	<link rel="stylesheet" href="http://static.tumblr.com/cqczc5x/kYdmihjuj/normalize.css" type="text/css" media="all">
 	<style type="text/css">
-
 		img, video, object, embed {
 			max-width: 100%;
 			height: auto !important;
 		}
-
-		.clearfix {zoom:1;}
+		.clearfix {
+			zoom: 1;
+		}
 		.clearfix:before, .clearfix:after {
-		  content: "\0020";
-		  display: block;
-		  height: 0;
-		  overflow: hidden; }
-		.clearfix:after {clear: both;}
+			content: "\0020";
+			display: block;
+			height: 0;
+			overflow: hidden;
+		}
+		.clearfix:after {
+			clear: both;
+		}
 
-		/*Tumblr inherited */
+		/* Tumblr inherited */
 		iframe#tumblr_controls {}
 		.search_query {}
 		.read_more_container a {}
-
 	</style>
+
 	<!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
+
 <body>
+	
 	<header id="header">
 		<h1 id="logo"><a href="/">{Title}</a></h1>
 		{block:Description}<div class="description">{Description}</div>{/block:Description}
@@ -44,52 +61,71 @@
 			<li><a href="/archive">{lang:Archive}</a></li>
 			{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
 		</ul>
+		
 		<form id="search" action="/search" method="get">
 			<input type="text" placeholder="{lang:Search}" name="q" value="{SearchQuery}">
 			<input type="submit" value="{lang:Search}">
 		</form>
 	</header>
+	
 	<section class="content">
-
-
+		
+		<!-- SEARCH RESULTS -->
 		{block:SearchPage}
-		<div class="result">
-			<p>{lang:Found SearchResultCount results for SearchQuery 2}</p>
-			{block:NoSearchResults}<p>{lang:No results for SearchQuery 2}</p>{/block:NoSearchResults}
-		</div>
+			<div class="result">
+				<p>{lang:Found SearchResultCount results for SearchQuery 2}</p>
+				{block:NoSearchResults}<p>{lang:No results for SearchQuery 2}</p>{/block:NoSearchResults}
+			</div>
 		{/block:SearchPage}
-		{block:TagPage}<div class="result"><p>{lang:TagResultCount posts tagged Tag 3}</p></div>{/block:TagPage}
+		
+		<!-- TAG PAGE -->
+		{block:TagPage}
+			<div class="result"><p>{lang:TagResultCount posts tagged Tag 3}</p></div>
+		{/block:TagPage}
 
+		<!-- POSTS (all kinds) -->
 		{block:Posts}
 		<article class="post {TagsAsClasses}">
+			
+			<!-- POST DATE -->
 			{block:Date}
 			{block:NewDayDate}<p>{DayOfWeek}, {Month} {DayOfMonth}, {Year}</p>{/block:NewDayDate}
 			{block:SameDayDate}<p>{DayOfWeek}, {Month} {DayOfMonth}, {Year}</p>{/block:SameDayDate}
 			{/block:Date}
+			
+			<!-- TEXT POST -->
 			{block:Text}
 			<div class="text">
 				{block:Title}<h3>{Title}</h3>{/block:Title}
 				{Body}
 			</div>
 			{/block:Text}
+			
+			<!-- QUOTE POST -->
 			{block:Quote}
 			<div class="quote">
 				<blockquote class="words {Length}">&#8220;{Quote}&#8221;</blockquote>
 				{block:Source}<p class="source">&mdash; {Source}</p>{/block:Source}
 			</div>
 			{/block:Quote}
+			
+			<!-- LINK POST -->
 			{block:Link}
 			<div class="link">
 				<h3><a href="{URL}" {Target}>{Name}</a></h3>
 				{block:Description}<div class="caption">{Description}</div>{/block:Description}
 			</div>
 			{/block:Link}
+			
+			<!-- VIDEO POST -->
 			{block:Video}
 			<div class="video">
 				{Video-500}
 				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 			</div>
 			{/block:Video}
+			
+			<!-- AUDIO POST -->
 			{block:Audio}
 			<div class="audio">
 				{block:AlbumArt}<img src="{AlbumArtURL}" alt="">{/block:AlbumArt}
@@ -97,42 +133,50 @@
 				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 			</div>
 			{/block:Audio}
+			
+			<!-- PHOTO POST -->
 			{block:Photo}
 			<div class="photo">
-					{LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>{LinkCloseTag}
-					{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+				{LinkOpenTag}<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>{LinkCloseTag}
+				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 			</div>
 			{/block:Photo}
+			
+			<!-- PHOTOSET POST -->
 			{block:Photoset}
 			<div class="photoset">
 				{block:Photos}
-					<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
-					{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
-			    {/block:Photos}
+				<img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"/>
+				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+				{/block:Photos}
 				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 			</div>
 			{/block:Photoset}
 
+			<!-- PANORAMA POST -->
 			{block:Panorama}
 			<div class="panorama">
-			    {LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag}
-			    {block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
+				{LinkOpenTag}<img src="{PhotoURL-Panorama}" alt="{PhotoAlt}" />{LinkCloseTag}
+				{block:Caption}<div class="caption">{Caption}</div>{/block:Caption}
 			</div>
 			{/block:Panorama}
 
+			<!-- CHAT POST -->
 			{block:Chat}
 			<div class="chat">
 				{block:Title}<h3>{Title}</h3>{/block:Title}
 				<ul class="conversation">
 					{block:Lines}
 					<li class="line {Alt}">
-						{block:Label}<span class="person">{Label}</span>{/block:Label}
-						<span class="person-said">{Line}</span>
+					{block:Label}<span class="person">{Label}</span>{/block:Label}
+					<span class="person-said">{Line}</span>
 					</li>
 					{/block:Lines}
 				</ul>
 			</div>
 			{/block:Chat}
+			
+			<!-- ANSWER POST -->
 			{block:Answer}
 			<div class="answer">
 				<img src="{AskerPortraitURL-40}">
@@ -141,21 +185,24 @@
 				{Answer}
 			</div>
 			{/block:Answer}
+			
 			{block:IndexPage}<p><a href="{Permalink}" class="permalink">{lang:Permalink}</a></p>{/block:IndexPage}
 		</article>
-		{/block:Posts}
+		{/block:Posts} <!-- end posts -->
 
+		<!-- PREVIOUS/NEXT POST-BY-POST -->
 		{block:PermalinkPagination}
-		<div class="pagination">
-			{block:PreviousPost}<a class="prev"href="{PreviousPost}">{lang:Previous post}</a>{/block:PreviousPost}
-			{block:NextPost}<a class="next" href="{NextPost}">{lang:Next post}</a>{/block:NextPost}
-		</div>
+			<div class="pagination">
+				{block:PreviousPost}<a class="prev"href="{PreviousPost}">{lang:Previous post}</a>{/block:PreviousPost}
+				{block:NextPost}<a class="next" href="{NextPost}">{lang:Next post}</a>{/block:NextPost}
+			</div>
 		{/block:PermalinkPagination}
 
+		<!-- PREVIOUS/NEXT PAGE OF POSTS -->
 		{block:Pagination}
-		<div class="pagination">
+			<div class="pagination">
 			{block:PreviousPage}<a class="prev" href="{PreviousPage}">{lang:Previous}</a>{/block:PreviousPage}
-
+			
 			{block:JumpPagination length="5"}
 				{block:CurrentPage}<span class="current-page">{PageNumber}</span>{/block:CurrentPage}
 				{block:JumpPage}<a class="jump-page" href="{URL}">{PageNumber}</a>{/block:JumpPage}
@@ -164,6 +211,7 @@
 			{block:NextPage}<a class="next" href="{NextPage}">{lang:Next}</a>{/block:NextPage}
 		</div>
 		{/block:Pagination}
-	</section><!--close content-->
+		
+	</section> <!-- end content-->
 </body>
 </html>
