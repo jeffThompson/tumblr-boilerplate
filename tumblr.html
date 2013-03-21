@@ -53,6 +53,7 @@
 
 <body>
 	
+	<!-- BLOG TITLE, ETC -->
 	<header id="header">
 		<h1 id="logo"><a href="/">{Title}</a></h1>
 		{block:Description}<div class="description">{Description}</div>{/block:Description}
@@ -62,6 +63,7 @@
 			{block:AskEnabled}<li><a href="/ask">{AskLabel}</a></li>{/block:AskEnabled}
 		</ul>
 		
+		<!-- SEARCH -->
 		<form id="search" action="/search" method="get">
 			<input type="text" placeholder="{lang:Search}" name="q" value="{SearchQuery}">
 			<input type="submit" value="{lang:Search}">
@@ -193,22 +195,22 @@
 		<!-- PREVIOUS/NEXT POST-BY-POST -->
 		{block:PermalinkPagination}
 			<div class="pagination">
-				{block:PreviousPost}<a class="prev"href="{PreviousPost}">{lang:Previous post}</a>{/block:PreviousPost}
-				{block:NextPost}<a class="next" href="{NextPost}">{lang:Next post}</a>{/block:NextPost}
+				{block:PreviousPost}<a class="prev"href="{PreviousPost}">&larr; Previous post</a>{/block:PreviousPost}
+				{block:NextPost}<a class="next" href="{NextPost}">Next post &rarr;</a>{/block:NextPost}
 			</div>
 		{/block:PermalinkPagination}
 
 		<!-- PREVIOUS/NEXT PAGE OF POSTS -->
 		{block:Pagination}
 			<div class="pagination">
-			{block:PreviousPage}<a class="prev" href="{PreviousPage}">{lang:Previous}</a>{/block:PreviousPage}
+			{block:PreviousPage}<a class="prev" href="{PreviousPage}">&larr; Newer Posts</a>{/block:PreviousPage}
 			
 			{block:JumpPagination length="5"}
 				{block:CurrentPage}<span class="current-page">{PageNumber}</span>{/block:CurrentPage}
 				{block:JumpPage}<a class="jump-page" href="{URL}">{PageNumber}</a>{/block:JumpPage}
 			{/block:JumpPagination}
 
-			{block:NextPage}<a class="next" href="{NextPage}">{lang:Next}</a>{/block:NextPage}
+			{block:NextPage}<a class="next" href="{NextPage}">Older Posts &rarr;</a>{/block:NextPage}
 		</div>
 		{/block:Pagination}
 		
